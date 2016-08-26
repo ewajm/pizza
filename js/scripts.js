@@ -118,7 +118,9 @@ $(document).ready(function(){
     $("#orderForm")[0].reset();
     $(".orderDisplay").append(createPizzaOutput(pizza, currentCustomer));
     updateTotal(thisStore, currentCustomer);
-    $("button.editButton").last().click(function(){
+    $(".editButton").last().click(function(event){
+      debugger;
+      event.preventDefault();
       populateForm(pizza);
       var pizzaIndex = currentCustomer.pizzas.indexOf(pizza);
       currentCustomer.pizzas.splice(pizzaIndex, 1);
@@ -141,7 +143,7 @@ $(document).ready(function(){
       $("#orderSummary").html("<a href='#'>" + currentCustomer.pizzas.length + " pizza(s) totaling $" + thisStore.getCustomerTotal(currentCustomer) + ".00</a>");
       $("#orderSummary a").click(function(event){
         event.preventDefault();
-        $(".orderDisplay button").remove();
+        //$(".orderDisplay button").remove();
         $("#receiptModal").modal();
       });
       $("#order").slideUp();
@@ -151,17 +153,17 @@ $(document).ready(function(){
     }
   });
 
-  $("#deliveryOrder button").click(function(){
-    var deliveryStatus = thisStore.getDeliveryStatus();
-    $("#deliveryStatus").append("<li>Your pizza is " + deliveryStatus + "</li>");
-    if(deliveryStatus === "delivered"){
-      $("#deliveryOrder button").prop("disabled", true);
-      $("#deliveryStatus").after("<p>Didn't get your pizza? <span id='refund'>Click here</span> for our refund policy!");
-      $("#refund").click(function(){
-        alert("NO REFUNDS EVER");
-      });
-    }
-  });
+  // $("#deliveryOrder button").click(function(){
+  //   var deliveryStatus = thisStore.getDeliveryStatus();
+  //   $("#deliveryStatus").append("<li>Your pizza is " + deliveryStatus + "</li>");
+  //   if(deliveryStatus === "delivered"){
+  //     $("#deliveryOrder button").prop("disabled", true);
+  //     $("#deliveryStatus").after("<p>Didn't get your pizza? <span id='refund'>Click here</span> for our refund policy!");
+  //     $("#refund").click(function(){
+  //       alert("NO REFUNDS EVER");
+  //     });
+  //   }
+  // });
 
   function generateCheckboxes(selectItems, formID){
     selectItems.forEach(function(item){
