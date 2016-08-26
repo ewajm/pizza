@@ -11,21 +11,42 @@
   </head>
   <body>
     <div class="container">
-      <h1 class = "storeName"></h1>
+      <h1><span class="storeName"></span>!</h1>
       <p>Welcome to <span class="storeName"></span>! We pride ourselves on having only the finest <span class="place"></span> ingredients. But don't take our word for it! Give us a try - we guarantee this will be the finest <span class="place"></span> pizza you have ever had or your money back!*</p>
-      <form id="orderForm">
-        <div class="form-group">
-          <label for="input">Enter input</label>
-          <input id="input" class="form-control" type="text">
-        </div>
-        <button type="submit" class="btn btn-primary">Add to Order</button>
-      </form>
-      <div id="result">
-      </div>
+      <div class="row">
+        <div class="col-md-8">
+          <h2>Create Your <span class="place"></span>Pizza!</h2>
+          <form id="orderForm">
+            <div class="form-group">
+              <label for="sizeSelect">Choose Pizza Size:</label>
+              <select id="sizeSelect" class=form-control required>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="meatSelect">Choose Meats:</label>
+              <select id="meatSelect" class=form-control>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="vegSelect">Choose Veggies:</label>
+              <select id="vegSelect" class=form-control>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Add to Order</button>
+          </form>
+        </div><!--end column div-->
+        <div class="col-md-4">
+          <h2>Your Order: </h2>
+          <div id="orderDisplay">
+          <hr>
+          <p>Total: <span class="amtOwed"></span></p>
+          </div>
+        </div><!--end column div-->
+      </div><!--end row div-->
       <div class="footer">
         <p class="caveat">*Please Note: we <em>will</em> argue about the exact definitions of 'finest', '<span class="place"></span>', and 'pizza' until you give up.<p>
         <p class="attribution">Coded by E.Manek</p>
       </div>
-    </div>
+    </div><!--end container div-->
   </body>
 </html>

@@ -6,7 +6,7 @@ function Store(name, place){
   this.place = place;
   this.meats = ["pepperoni", "sausage", "Canadian bacon", "actual bacon", "anchovies"];
   this.veggies = ["onions", "olives", "green peppers", "mushrooms", "tomatoes", "banana peppers", "jalapenos", "pineapple"];
-  this. sizes = ["L", "M", "S"];
+  this. sizes = ["Large", "Medium", "Small"];
   this.sizePrices = [12, 9, 6];
 }
 
