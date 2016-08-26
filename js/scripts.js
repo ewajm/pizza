@@ -102,13 +102,13 @@ $(document).ready(function(){
     var pizza = new Pizza(pizzaSize, meatToppings, vegToppings);
     currentCustomer.addPizza(pizza);
     $("#orderForm")[0].reset();
-    $("#orderDisplay").append(createPizzaOutput(pizza, currentCustomer));
+    $(".orderDisplay").append(createPizzaOutput(pizza, currentCustomer));
     updateTotal(thisStore, currentCustomer);
     $("button.editButton").last().click(function(){
       populateForm(pizza);
       var pizzaIndex = currentCustomer.pizzas.indexOf(pizza);
       currentCustomer.pizzas.splice(pizzaIndex, 1);
-      $(this).parent().remove();
+      $(this).parents(".pizzaOutput").remove();
       updateTotal(thisStore, currentCustomer);
     });
   });
@@ -124,7 +124,12 @@ $(document).ready(function(){
         waitString += waitTime[1] + " minutes";
       }
       $(".deliveryTime").text(waitString);
-      $("#orderSummary").text(currentCustomer.pizzas.length + " pizza(s) totaling $" + thisStore.getCustomerTotal(currentCustomer) + ".00");
+      $("#orderSummary").html("<a href='#'>" + currentCustomer.pizzas.length + " pizza(s) totaling $" + thisStore.getCustomerTotal(currentCustomer) + ".00</a>");
+      $("#orderSummary a").click(function(event){
+        event.preventDefault();
+        $("#receiptModal").children(".editButton").remove();
+        $("#receiptModal").modal();
+      });
       $("#order").slideUp();
       $("#checkedOut").slideDown();
     } else {
@@ -160,7 +165,7 @@ $(document).ready(function(){
     if(toppingOutput.length === 0){
       toppingOutput = "No toppings";
     }
-    return '<p>' + pizza.size + ' Pizza - $' + thisStore.getPrice(pizza) + '.00<button type = "button" class="btn btn-danger editButton">Edit/Remove</button><br><span class = "toppings">' +  toppingOutput + '</span></p>';
+    return '<div class="pizzaOutput"><div class="pizzaNPrice"><span>' + pizza.size + ' Pizza</span> <span>$' + thisStore.getPrice(pizza) + '.00</span><button type = "button" class="btn btn-danger editButton">Edit/Remove</button></div><div class = "toppings">' +  toppingOutput + '</div></div>';
   }
 
   function updateTotal(store, customer){

@@ -1,7 +1,63 @@
+body {
+  background-color: #e12301;
+}
+
+h1 {
+  text-align: center;
+}
+
+h1, h2, h3{
+  color:#ce0000;
+  font-weight: bold;
+  font-family: impact;
+}
+
 hr {
   border:0;
   border-bottom: 1px dashed #ccc;
   background: #999;
+}
+
+footer {
+  font-size: x-small;
+  text-align: center;
+  color: #e1d800;
+  margin-top: 1rem;
+}
+
+.container {
+  background-color: #fffa8a;
+  font-weight: bold;
+}
+
+.pizzaOutput {
+  margin-bottom: 1rem;
+}
+
+.pizzaNPrice {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  font-size: medium;
+}
+
+.toppings {
+  font-size: small;
+  font-style: italic;
+  width: 90%;
+  margin: 2px auto;
+}
+
+.footnote {
+  font-size: x-small;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+#orderSummary {
+  font-size: xx-large;
+  text-align: center;
 }
 
 #checkedOut, #orderWarning, #userAddressGroup, #deliveryOrder {
