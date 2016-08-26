@@ -12,25 +12,22 @@
   <body>
     <div class="container">
       <h1><span class="storeName"></span>!</h1>
-      <p>Welcome to <span class="storeName"></span>! We pride ourselves on having only the finest <span class="place"></span> ingredients. But don't take our word for it! Give us a try - we guarantee this will be the finest <span class="place"></span> pizza you have ever had or your money back!*</p>
+      <p>Welcome to the <span class="place"></span> branch of <span class="storeName"></span>! We pride ourselves on having only the finest <span class="place"></span> ingredients. But don't take our word for it! Give us a try - we guarantee this will be the finest <span class="place"></span> pizza you have ever had or your money back!*</p>
       <div class="row">
         <div class="col-md-8">
-          <h2>Create Your <span class="place"></span>Pizza!</h2>
+          <h2>Create Your <span class="place"></span> Pizza!</h2>
           <form id="orderForm">
             <div class="form-group">
               <label for="sizeSelect">Choose Pizza Size:</label>
               <select id="sizeSelect" class=form-control required>
               </select>
             </div>
-            <div class="form-group">
+            <div class="form-group" id = "meatBoxes">
               <label for="meatSelect">Choose Meats:</label>
-              <select id="meatSelect" class=form-control>
-              </select>
+
             </div>
-            <div class="form-group">
+            <div class="form-group" id = "vegBoxes">
               <label for="vegSelect">Choose Veggies:</label>
-              <select id="vegSelect" class=form-control>
-              </select>
             </div>
             <button type="submit" class="btn btn-primary">Add to Order</button>
           </form>

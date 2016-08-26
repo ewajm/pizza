@@ -6,12 +6,12 @@ function Store(name, place){
   this.place = place;
   this.meats = ["pepperoni", "sausage", "Canadian bacon", "actual bacon", "anchovies"];
   this.veggies = ["onions", "olives", "green peppers", "mushrooms", "tomatoes", "banana peppers", "jalapenos", "pineapple"];
-  this. sizes = ["Large", "Medium", "Small"];
+  this.pizzaSizes = ["Large", "Medium", "Small"];
   this.sizePrices = [12, 9, 6];
 }
 
 Store.prototype.getPrice = function(pizza){
-  pizza.price = this.sizePrices[this.sizes.indexOf(pizza.size)];
+  pizza.price = this.sizePrices[this.pizzaSizes.indexOf(pizza.size)];
   pizza.price += pizza.meatToppings.length * 2;
   pizza.price += pizza.vegToppings.length;
   return pizza.price;
@@ -48,9 +48,25 @@ Customer.prototype.addPizza = function(pizza){
 
 //<!-- Front End  -->
 $(document).ready(function(){
-  var thisStore = new Store("Generic Pizza Place", "Portland");
+  var thisStore = new Store("Generic Pizza Place", "Generic");
+  createStoreDisplay(thisStore);
   $("form#inputForm").submit(function(event){
     event.preventDefault();
-
   });
+
+  function generateCheckboxes(selectItems, formID){
+    selectItems.forEach(function(item){
+      $("div#"+formID).append('<div class="checkbox"><label><input type="checkbox" value="' + item + '" aria-label="...">' + item + '</label></div>');
+    });
+  }
+
+  function createStoreDisplay(store){
+    store.pizzaSizes.forEach(function(size){
+      $("select#sizeSelect").append("<option value='" + size + "'>" + size + "</option>");
+    });
+    generateCheckboxes(store.meats, "meatBoxes");
+    generateCheckboxes(store.veggies, "vegBoxes");
+    $(".place").text(store.place);
+    $(".storeName").text(store.name);
+  }
 });
