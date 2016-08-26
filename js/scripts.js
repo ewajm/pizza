@@ -11,6 +11,7 @@ function Store(name, place){
 }
 
 Store.prototype.getPrice = function(pizza){
+  pizza.price = 0;
   pizza.price = this.sizePrices[this.pizzaSizes.indexOf(pizza.size)];
   pizza.price += pizza.meatToppings.length * 2;
   pizza.price += pizza.vegToppings.length;
@@ -18,9 +19,14 @@ Store.prototype.getPrice = function(pizza){
 }
 
 Store.prototype.getCustomerTotal = function(customer){
-  customers.pizzas.forEach(function(pizza){
-    customer.amtOwed += this.getPrice(pizza);
-  });
+  customer.amtOwed = 0;
+  if(customer.pizzas.length > 0){
+    for(var i = 0; i < customer.pizzas.length; i++){
+      customer.amtOwed += customer.pizzas[i].price;
+    }
+  } else {
+    customer.amtOwed = 0;
+  }
   return customer.amtOwed;
 }
 
@@ -56,20 +62,29 @@ $(document).ready(function(){
     var pizzaSize = $("#sizeSelect").val();
     var meatToppings = [];
     $("#meatBoxes input:checked").each(function(){
-      meatToppings.push($(this).val());
+      meatToppings.push($(this).val().replace(/\-/g, " "));
     });
     var vegToppings = [];
     $("#vegBoxes input:checked").each(function(){
-      vegToppings.push($(this).val());
+      vegToppings.push($(this).val().replace(/\-/g, " "));
     });
     var pizza = new Pizza(pizzaSize, meatToppings, vegToppings);
     currentCustomer.addPizza(pizza);
-    $("#orderDisplay").append(createPizzaOutput(pizza));
+    $("#orderForm")[0].reset();
+    $("#orderDisplay").append(createPizzaOutput(pizza, currentCustomer));
+    updateTotal(thisStore, currentCustomer);
+    $("button.editButton").last().click(function(){
+      populateForm(pizza);
+      var pizzaIndex = currentCustomer.pizzas.indexOf(pizza);
+      currentCustomer.pizzas.splice(pizzaIndex, 1);
+      $(this).parent().remove();
+      updateTotal(thisStore, currentCustomer);
+    });
   });
 
   function generateCheckboxes(selectItems, formID){
     selectItems.forEach(function(item){
-      $("div#"+formID).append('<div class="checkbox"><label><input type="checkbox" value="' + item + '" aria-label="...">' + item + '</label></div>');
+      $("div#"+formID).append('<div class="checkbox"><label><input type="checkbox" value="' + item.replace(/\s/g, '-') + '" aria-label="...">' + item + '</label></div>');
     });
   }
 
@@ -83,7 +98,7 @@ $(document).ready(function(){
     $(".storeName").text(store.name);
   }
 
-  function createPizzaOutput(pizza){
+  function createPizzaOutput(pizza, customer){
     var toppingOutput = "";
     pizza.meatToppings.forEach(function(topping){
       toppingOutput += topping + ", ";
@@ -95,6 +110,20 @@ $(document).ready(function(){
     if(toppingOutput.length === 0){
       toppingOutput = "No toppings";
     }
-    return '<p>' + pizza.size + ' Pizza - $' + thisStore.getPrice(pizza) + '.00<br><span class = "toppings">' +  toppingOutput + '</span></p>';
+    return '<p>' + pizza.size + ' Pizza - $' + thisStore.getPrice(pizza) + '.00<button type = "button" class="btn btn-danger editButton">Edit/Remove</button><br><span class = "toppings">' +  toppingOutput + '</span></p>';
+  }
+
+  function updateTotal(store, customer){
+    $(".amtOwed").text("$" + store.getCustomerTotal(customer) + ".00");
+  }
+
+  function populateForm(pizza){
+    $("#sizeSelect").val(pizza.size).prop('selected', true);
+    pizza.meatToppings.forEach(function(topping){
+          $("#meatBoxes input:checkbox[value="+ topping.replace(/\s/g, '-') + "]").prop('checked', true);
+    });
+    pizza.vegToppings.forEach(function(topping){
+        $("#vegBoxes input:checkbox[value="+ topping.replace(/\s/g, '-') + "]").prop('checked', true);
+    });
   }
 });
