@@ -24,6 +24,11 @@ footer {
   margin-top: 1rem;
 }
 
+h3 button.btn-primary {
+  font-family: sans-serif;
+  margin-left: 2rem;
+}
+
 .container {
   background-color: #fffa8a;
   font-weight: bold;
@@ -58,11 +63,34 @@ footer {
   text-align: right;
 }
 
-#orderSummary {
+.center-align {
+  text-align: center;
+}
+
+#orderSummary, #deliveryOrder p{
   font-size: x-large;
   text-align: center;
 }
 
 #checkedOut, #orderWarning, #userAddressGroup, #deliveryOrder {
   display: none;
+}
+
+#deliveryStatus {
+  list-style-type: none;
+}
+
+#carryoutOrder {
+  margin-bottom: 2rem;
+}
+
+#refund {
+  color: 	#e12301;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#refund:hover {
+  color: #ce0000;
+  text-decoration: underline;
 }
