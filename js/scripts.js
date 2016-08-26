@@ -1,5 +1,12 @@
 //<!-- Back End -->
-
+/*
+Additional Feature Ideas (mostly UI probably):
+* regional specialties based on input location
+* silly locations (space http://www.color-hex.com/color-palette/17107, Atlantis-generally under the sea http://www.color-hex.com/color-palette/13364, something fantasy relatedhttp://www.color-hex.com/color-palette/3694(seeliehttp://www.color-hex.com/color-palette/12975, unseelie?http://www.color-hex.com/color-palette/1753))
+* pre-made pizza menu? (with ability to edit in case you don't like peppers)
+* pizza for non-humans (aliens, robots, mermaids, vampires/the undead)
+* delivery tracking! (random)
+*/
 //objects
 function Store(name, place){
   this.name = name;
@@ -127,7 +134,7 @@ $(document).ready(function(){
       $("#orderSummary").html("<a href='#'>" + currentCustomer.pizzas.length + " pizza(s) totaling $" + thisStore.getCustomerTotal(currentCustomer) + ".00</a>");
       $("#orderSummary a").click(function(event){
         event.preventDefault();
-        $("#receiptModal").children(".editButton").remove();
+        $(".orderDisplay button").remove();
         $("#receiptModal").modal();
       });
       $("#order").slideUp();

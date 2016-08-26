@@ -28,13 +28,6 @@ Program will use customer objects at checkout to request delivery information
 * example input: "123 Steve Ln"
 * example output: customer.address = "123 Steve Ln"
 
-Additional Feature Ideas (mostly UI probably):
-* regional specialties based on input location
-* silly locations (Portland, spacehttp://www.color-hex.com/color-palette/17107, Atlantis-generally under the sea http://www.color-hex.com/color-palette/13364, something fantasy relatedhttp://www.color-hex.com/color-palette/3694(seeliehttp://www.color-hex.com/color-palette/12975, unseelie?http://www.color-hex.com/color-palette/1753))
-* pre-made pizza menu? (with ability to edit in case you don't like peppers)
-* pizza for non-humans (aliens, robots, mermaids, vampires/the undead)
-* delivery tracking! (random)
-
 ## Setup/Installation Requirements
 
 * _Copy the repository from GitHub_
