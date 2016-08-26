@@ -49,9 +49,22 @@ Customer.prototype.addPizza = function(pizza){
 //<!-- Front End  -->
 $(document).ready(function(){
   var thisStore = new Store("Generic Pizza Place", "Generic");
+  var currentCustomer = new Customer("Name");
   createStoreDisplay(thisStore);
-  $("form#inputForm").submit(function(event){
+  $("form#orderForm").submit(function(event){
     event.preventDefault();
+    var pizzaSize = $("#sizeSelect").val();
+    var meatToppings = [];
+    $("#meatBoxes input:checked").each(function(){
+      meatToppings.push($(this).val());
+    });
+    var vegToppings = [];
+    $("#vegBoxes input:checked").each(function(){
+      vegToppings.push($(this).val());
+    });
+    var pizza = new Pizza(pizzaSize, meatToppings, vegToppings);
+    currentCustomer.addPizza(pizza);
+    $("#orderDisplay").append(createPizzaOutput(pizza));
   });
 
   function generateCheckboxes(selectItems, formID){
@@ -68,5 +81,20 @@ $(document).ready(function(){
     generateCheckboxes(store.veggies, "vegBoxes");
     $(".place").text(store.place);
     $(".storeName").text(store.name);
+  }
+
+  function createPizzaOutput(pizza){
+    var toppingOutput = "";
+    pizza.meatToppings.forEach(function(topping){
+      toppingOutput += topping + ", ";
+    });
+    pizza.vegToppings.forEach(function(topping){
+      toppingOutput += topping + ", ";
+    });
+    toppingOutput = toppingOutput.replace(/(?:,\s)(?!(\w))/g, "");
+    if(toppingOutput.length === 0){
+      toppingOutput = "No toppings";
+    }
+    return '<p>' + pizza.size + 'Pizza - $' + store.getPrice(pizza) + '.00<br><span class = "toppings">' +  toppingOutput + '</span></p>';
   }
 });
