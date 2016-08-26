@@ -7,23 +7,25 @@
     <script src='js/jquery-3.1.0.js'></script>
     <script src='js/bootstrap.min.js' type='text/javascript'></script>
     <script src='js/scripts.js'></script>
-    <title>Template</title>
+    <title>Pizza!</title>
   </head>
   <body>
-
-    <!-- Simple Form Input for Testing -->
     <div class="container">
-      <h1>Form Input</h1>
-      <form id="inputForm">
+      <h1 class = "storeName"></h1>
+      <p>Welcome to <span class="storeName"></span>! We pride ourselves on having only the finest <span class="place"></span> ingredients. But don't take our word for it! Give us a try - we guarantee this will be the finest <span class="place"></span> pizza you have ever had or your money back!*</p>
+      <form id="orderForm">
         <div class="form-group">
           <label for="input">Enter input</label>
           <input id="input" class="form-control" type="text">
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">Add to Order</button>
       </form>
       <div id="result">
       </div>
+      <div class="footer">
+        <p class="caveat">*Please Note: we <em>will</em> argue about the exact definitions of 'finest', '<span class="place"></span>', and 'pizza' until you give up.<p>
+        <p class="attribution">Coded by E.Manek</p>
+      </div>
     </div>
-
   </body>
 </html>
