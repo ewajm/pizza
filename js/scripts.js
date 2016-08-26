@@ -16,7 +16,7 @@ Store.prototype.getPrice = function(pizza){
   pizza.price += pizza.meatToppings.length * 2;
   pizza.price += pizza.vegToppings.length;
   return pizza.price;
-}
+};
 
 Store.prototype.getCustomerTotal = function(customer){
   customer.amtOwed = 0;
@@ -28,7 +28,14 @@ Store.prototype.getCustomerTotal = function(customer){
     customer.amtOwed = 0;
   }
   return customer.amtOwed;
-}
+};
+
+Store.prototype.getWaitTime = function(customer){
+  var time = 30 * customer.pizzas.length;
+  var hours = parseInt(time / 60);
+  var minutes = time % 60;
+  return [hours, minutes];
+};
 
 function Pizza(size, meatToppings, vegToppings){
   this.size = size;
@@ -42,6 +49,7 @@ function Customer(name){
   this.pizzas = [];
   this.amtOwed = 0;
   this.address;
+  this.delivery = false;
 }
 
 Customer.prototype.setAddress = function(addressString){
@@ -55,8 +63,31 @@ Customer.prototype.addPizza = function(pizza){
 //<!-- Front End  -->
 $(document).ready(function(){
   var thisStore = new Store("Generic Pizza Place", "Generic");
-  var currentCustomer = new Customer("Name");
+  var currentCustomer = new Customer("User");
   createStoreDisplay(thisStore);
+
+  $("#startModal").modal();
+
+  $("input:radio[name=deliveryOption]").change(function(){
+    $("#userAddress").parent().toggle();
+    $("#userAddress").prop("required", function( i, val ) {
+      return !val;
+    });
+  });
+
+  $("form#userInfoForm").submit(function(event){
+    event.preventDefault();
+    currentCustomer.name = $("#userName").val();
+    if($("#delivery").is(":checked")){
+      currentCustomer.delivery = true;
+      currentCustomer.address = $("#userAddress").val();
+      $(".address").text(currentCustomer.address);
+      $("#deliveryOrder").show();
+      $("#carryoutOrder").hide();
+    }
+    $("#startModal").modal("hide");
+  });
+
   $("form#orderForm").submit(function(event){
     event.preventDefault();
     var pizzaSize = $("#sizeSelect").val();
@@ -80,6 +111,25 @@ $(document).ready(function(){
       $(this).parent().remove();
       updateTotal(thisStore, currentCustomer);
     });
+  });
+
+  $("#checkoutButton").click(function(){
+    if(currentCustomer.pizzas.length > 0){
+      var waitTime = thisStore.getWaitTime(currentCustomer);
+      var waitString = "";
+      if(waitTime[0]){
+        waitString += waitTime[0] + " hour(s) ";
+      }
+      if(waitTime[1]){
+        waitString += waitTime[1] + " minutes";
+      }
+      $(".deliveryTime").text(waitString);
+      $("#orderSummary").text(currentCustomer.pizzas.length + " pizza(s) totaling $" + thisStore.getCustomerTotal(currentCustomer) + ".00");
+      $("#order").slideUp();
+      $("#checkedOut").slideDown();
+    } else {
+      $("#orderWarning").show();
+    }
   });
 
   function generateCheckboxes(selectItems, formID){

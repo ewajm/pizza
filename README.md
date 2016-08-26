@@ -33,7 +33,6 @@ Additional Feature Ideas (mostly UI probably):
 * silly locations (Portland, spacehttp://www.color-hex.com/color-palette/17107, Atlantis-generally under the sea http://www.color-hex.com/color-palette/13364, something fantasy relatedhttp://www.color-hex.com/color-palette/3694(seeliehttp://www.color-hex.com/color-palette/12975, unseelie?http://www.color-hex.com/color-palette/1753))
 * pre-made pizza menu? (with ability to edit in case you don't like peppers)
 * pizza for non-humans (aliens, robots, mermaids, vampires/the undead)
-* drag and drop ingredients?
 * delivery tracking! (random)
 
 ## Setup/Installation Requirements

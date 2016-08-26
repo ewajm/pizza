@@ -3,3 +3,7 @@ hr {
   border-bottom: 1px dashed #ccc;
   background: #999;
 }
+
+#checkedOut, #orderWarning, #userAddressGroup, #deliveryOrder {
+  display: none;
+}

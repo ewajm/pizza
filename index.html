@@ -10,41 +10,108 @@
     <title>Pizza!</title>
   </head>
   <body>
+    <!--customer info modal-->
+    <div class="modal fade" id="startModal" tabindex="-1" role="dialog" aria-labelledby="startModalLabel">
+     <div class="modal-dialog" role="document">
+       <div class="modal-content">
+         <div class="modal-header">
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+           <h4 class="modal-title" id="startModalLabel">Please enter your information:</h4>
+         </div>
+         <div class="modal-body">
+           <form id="userInfoForm">
+             <div class="form-group">
+               <label for="userName" class="control-label">Name:</label>
+               <input type="text" class="form-control" id="userName" required>
+             </div>
+             <div id="userAddressGroup" class="form-group">
+               <label for="userAddress" class="control-label">Street Address:</label>
+               <input type="text" class="form-control" id="userAddress">
+             </div>
+             <div class="form-group">
+               <div class="radio-inline">
+                 <label>
+                   <input type="radio" name="deliveryOption"  checked>
+                   Carryout
+                 </label>
+               </div>
+               <div class="radio-inline">
+                 <label>
+                   <input type="radio" name="deliveryOption" id="delivery">
+                   Delivery
+                 </label>
+               </div>
+             </div>
+             <div class="modal-footer">
+               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+               <button type="submit" class="btn btn-primary">Take me to the pizza!</button>
+             </div>
+           </form>
+         </div>
+       </div>
+     </div>
+   </div>
+    <!---beginning of page content-->
     <div class="container">
       <h1><span class="storeName"></span>!</h1>
       <p>Welcome to the <span class="place"></span> branch of <span class="storeName"></span>! We pride ourselves on having only the finest <span class="place"></span> ingredients. But don't take our word for it! Give us a try - we guarantee this will be the finest <span class="place"></span> pizza you have ever had or your money back!*</p>
-      <div class="row">
-        <div class="col-md-8">
-          <h2>Create Your <span class="place"></span> Pizza!</h2>
-          <form id="orderForm">
-            <div class="form-group">
-              <label for="sizeSelect">Choose Pizza Size:</label>
-              <select id="sizeSelect" class=form-control required>
-              </select>
-            </div>
-            <div class="form-group" id = "meatBoxes">
-              <label for="meatBoxes">Choose Meats:</label>
+      <div id = "order">
+        <div id = "orderWarning">
+          <h2>Please order something first!</h2>
+        </div>
+        <div class="row">
+          <div class="col-md-8">
+            <h2>Create Your <span class="place"></span> Pizza!</h2>
+            <form id="orderForm">
+              <div class="form-group">
+                <label for="sizeSelect">Choose Pizza Size:</label>
+                <select id="sizeSelect" class=form-control required>
+                </select>
+              </div>
+              <div class="form-group" id = "meatBoxes">
+                <label for="meatBoxes">Choose Meats:</label>
 
+              </div>
+              <div class="form-group" id = "vegBoxes">
+                <label for="vegBoxes">Choose Veggies:</label>
+              </div>
+              <button type="submit" class="btn btn-primary">Add to Order</button>
+            </form>
+          </div><!--end column div-->
+          <div class="col-md-4">
+            <h2>Your Order: </h2>
+            <div id="orderDisplay">
             </div>
-            <div class="form-group" id = "vegBoxes">
-              <label for="vegBoxes">Choose Veggies:</label>
-            </div>
-            <button type="submit" class="btn btn-primary">Add to Order</button>
-          </form>
-        </div><!--end column div-->
-        <div class="col-md-4">
-          <h2>Your Order: </h2>
-          <div id="orderDisplay">
+            <hr>
+            <p>Total: <span class="amtOwed"></span></p>
+            <button id="checkoutButton" type="button" class="btn btn-success">Check out</button>
+          </div><!--end column div-->
+        </div><!--end row div-->
+        <div class="footnote">
+          <p class="caveat">*Please Note: In the event that you do try to get your money back, we <em>will</em> argue about the exact definitions of 'finest', '<span class="place"></span>', and 'pizza' until you give up.</p>
+        </div>
+      </div><!--end order div-->
+      <div id="checkedOut">
+        <h2>Thank you for your order of: </h2>
+        <div id="orderSummary">
+        </div>
+        <div id="deliveryOrder">
+          <p>Your order is on its way to <span class="address"></span></p>
+          <h3>Estimated wait time: <span class = "deliveryTime"></span></h3>
+          <button type="button" class="btn btn-primary">Check Delivery Status</button>
+          <div id="deliveryStatus">
           </div>
-          <hr>
-          <p>Total: <span class="amtOwed"></span></p>
-          <button type="button" class="btn btn-primary">Check out</button>
-        </div><!--end column div-->
-      </div><!--end row div-->
-      <div class="footer">
-        <p class="caveat">*Please Note: we <em>will</em> argue about the exact definitions of 'finest', '<span class="place"></span>', and 'pizza' until you give up.<p>
-        <p class="attribution">Coded by E.Manek</p>
-      </div>
+        </div>
+        <div id ="carryoutOrder">
+          <h3>Your order will be ready for pickup in <span class = "deliveryTime"></span></h3>
+        </div>
+      </div><!--end order div-->
     </div><!--end container div-->
+    <footer>
+      <p class="attribution">Coded by E.Manek</p>
+    </footer>
   </body>
+  <footer>
+
+  </footer>
 </html>
