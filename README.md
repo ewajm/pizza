@@ -1,6 +1,6 @@
 # _Pizza Delivery_
 
-#### By _Ewa Manek_
+#### By _Ewa Manek, August 26, 2016_
 
 ## Description
 
@@ -30,13 +30,13 @@ Program will use customer objects at checkout to request delivery information
 
 ## Setup/Installation Requirements
 
-* _Site is live at 
+* _Site is live [here](http://ewajm.github.io/pizza/)_
 * _Alternately, Copy the repository from GitHub_
 * _Open the index.html file a browser of your choice_
 
 ## GitHub link
 
-https://github.com/ewajm/pizza
+[https://github.com/ewajm/pizza](https://github.com/ewajm/pizza)
 
 ## Licensing
 
