@@ -1,12 +1,11 @@
 //<!-- Back End -->
 /*
-Additional Feature Ideas (mostly UI probably):
-* regional specialties based on input location
-* silly locations (space http://www.color-hex.com/color-palette/17107, Atlantis-generally under the sea http://www.color-hex.com/color-palette/13364, something fantasy relatedhttp://www.color-hex.com/color-palette/3694(seeliehttp://www.color-hex.com/color-palette/12975, unseelie?http://www.color-hex.com/color-palette/1753))
-* pre-made pizza menu? (with ability to edit in case you don't like peppers)
-* pizza for non-humans (aliens, robots, mermaids, vampires/the undead)
-* delivery tracking! (random)
+TODO: silly locations (space http://www.color-hex.com/color-palette/17107, Atlantis-generally under the sea http://www.color-hex.com/color-palette/13364, something fantasy  related http://www.color-hex.com/color-palette/3694(seeliehttp://www.color-hex.com/color-palette/12975, unseelie?http://www.color-hex.com/color-palette/1753))
+TODO: pre-made pizza menu? (with ability to edit in case you don't like peppers)
+TODO: pizza for non-humans (aliens, robots, mermaids, vampires/the undead)
+TODO: delivery tracking! (random)
 */
+
 //objects
 function Store(name, place){
   this.name = name;
@@ -42,6 +41,12 @@ Store.prototype.getWaitTime = function(customer){
   var hours = parseInt(time / 60);
   var minutes = time % 60;
   return [hours, minutes];
+};
+
+Store.prototype.getDeliveryStatus = function(){
+  var statusArray = ["delivered", "in limbo", "in space", "on the moon", "in Narnia", "in Middle-Earth", "in Atlantis", "in the Bermuda Triangle", "in a volcano", "somewhere", "in your heart", "RIGHT BEHIND YOU"];
+  var randomNumber = Math.floor(Math.random() * statusArray.length);
+  return statusArray[randomNumber];
 };
 
 function Pizza(size, meatToppings, vegToppings){
@@ -82,12 +87,13 @@ $(document).ready(function(){
     });
   });
 
+  //form submit function for user info form on page load
   $("form#userInfoForm").submit(function(event){
     event.preventDefault();
     currentCustomer.name = $("#userName").val();
     if($("#delivery").is(":checked")){
       currentCustomer.delivery = true;
-      currentCustomer.address = $("#userAddress").val();
+      currentCustomer.setAddress($("#userAddress").val());
       $(".address").text(currentCustomer.address);
       $("#deliveryOrder").show();
       $("#carryoutOrder").hide();
@@ -95,6 +101,7 @@ $(document).ready(function(){
     $("#startModal").modal("hide");
   });
 
+  //form submit for pizza order form
   $("form#orderForm").submit(function(event){
     event.preventDefault();
     var pizzaSize = $("#sizeSelect").val();
@@ -141,6 +148,18 @@ $(document).ready(function(){
       $("#checkedOut").slideDown();
     } else {
       $("#orderWarning").show();
+    }
+  });
+
+  $("#deliveryOrder button").click(function(){
+    var deliveryStatus = thisStore.getDeliveryStatus();
+    $("#deliveryStatus").append("<li>Your pizza is " + deliveryStatus + "</li>");
+    if(deliveryStatus === "delivered"){
+      $("#deliveryOrder button").prop("disabled", true);
+      $("#deliveryStatus").after("<p>Didn't get your pizza? <span id='refund'>Click here</span> for our refund policy!");
+      $("#refund").click(function(){
+        alert("NO REFUNDS EVER");
+      });
     }
   });
 
