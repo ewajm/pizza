@@ -116,11 +116,9 @@ $(document).ready(function(){
     var pizza = new Pizza(pizzaSize, meatToppings, vegToppings);
     currentCustomer.addPizza(pizza);
     $("#orderForm")[0].reset();
-    $(".orderDisplay").append(createPizzaOutput(pizza, currentCustomer));
+    $("#orderDisplay").append(createPizzaOutput(pizza, currentCustomer));
     updateTotal(thisStore, currentCustomer);
-    $(".editButton").last().click(function(event){
-      debugger;
-      event.preventDefault();
+    $("button.editButton").last().click(function(){
       populateForm(pizza);
       var pizzaIndex = currentCustomer.pizzas.indexOf(pizza);
       currentCustomer.pizzas.splice(pizzaIndex, 1);
