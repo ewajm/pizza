@@ -95,6 +95,6 @@ $(document).ready(function(){
     if(toppingOutput.length === 0){
       toppingOutput = "No toppings";
     }
-    return '<p>' + pizza.size + 'Pizza - $' + store.getPrice(pizza) + '.00<br><span class = "toppings">' +  toppingOutput + '</span></p>';
+    return '<p>' + pizza.size + ' Pizza - $' + thisStore.getPrice(pizza) + '.00<br><span class = "toppings">' +  toppingOutput + '</span></p>';
   }
 });
