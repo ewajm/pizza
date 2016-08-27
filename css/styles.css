@@ -81,7 +81,7 @@ h3 button.btn-primary {
   text-align: center;
 }
 
-#checkedOut, #orderWarning, #userAddressGroup, #deliveryOrder {
+#checkedOut, #orderWarning, #userAddressGroup, #deliveryOrder, #premiumWarning {
   display: none;
 }
 

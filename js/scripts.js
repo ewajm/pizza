@@ -9,7 +9,7 @@ var branches = ["Space", "Undersea", "Fantasy"];
 //objects
 function Store(name){
   this.name = name;
-  this.place;
+  this.place = "Generic";
   this.meats = ["pepperoni", "sausage", "Canadian bacon", "actual bacon", "anchovies"];
   this.veggies = ["onions", "olives", "green peppers", "mushrooms", "tomatoes", "banana peppers", "jalapenos", "pineapple"];
   this.pizzaSizes = ["Large", "Medium", "Small"];
@@ -17,10 +17,9 @@ function Store(name){
 }
 
 Store.prototype.setBranch = function(placeIndex){
-  var branchMeats = [["space pepperoni", "space sausage"], ["shark", "kraken"], ["dragon", "gryphon"]];
-  var branchVeggies = [["space mushrooms", "space onions", "space olives"], ["red algae", "kelp", "sea grapes"], ["slime mold", "athelas", "fruit of the lotus tree"]];
+  var branchMeats = [["space pepperoni*", "space sausage*"], ["shark*", "kraken*"], ["dragon*", "gryphon*"]];
+  var branchVeggies = [["space onions*", "space olives*", "space green peppers*", "space mushrooms*"] , ["red algae*", "kelp*", "sea grapes*"], ["slime mold*", "athelas*", "fruit of the lotus tree*"]];
   this.place = branches[placeIndex];
-  this.name = this.place + " Pizza Place";
   this.meats = branchMeats[placeIndex].concat(this.meats);
   this.veggies = branchVeggies[placeIndex].concat(this.veggies);
 }
@@ -83,8 +82,7 @@ Customer.prototype.addPizza = function(pizza){
 
 //<!-- Front End  -->
 $(document).ready(function(){
-  var thisStore = new Store("Generic Pizza Place");
-  thisStore.setBranch("Generic");
+  var thisStore = new Store("A Pizza Place");
   var currentCustomer = new Customer("User");
   createStoreDisplay(thisStore);
 
@@ -107,6 +105,13 @@ $(document).ready(function(){
       $(".address").text(currentCustomer.address);
       $("#deliveryOrder").show();
       $("#carryoutOrder").hide();
+    }
+    var branch = parseInt($("#branchSelect").val());
+    console.log(isNaN(branch));
+    if(!isNaN(branch)){
+      thisStore.setBranch(branch);
+      createStoreDisplay(thisStore);
+      $("#premiumWarning").show();
     }
     $("#startModal").modal("hide");
   });
@@ -179,11 +184,12 @@ $(document).ready(function(){
 
   function generateCheckboxes(selectItems, formID){
     selectItems.forEach(function(item){
-      $("div#"+formID).append('<div class="checkbox"><label><input type="checkbox" value="' + item.replace(/\s/g, '-') + '" aria-label="...">' + item + '</label></div>');
+      $("div#"+formID).append('<div class="checkbox"><label><input type="checkbox" value="' + item.replace(/\s/g, '-').replace(/\*/, '') + '" aria-label="...">' + item + '</label></div>');
     });
   }
 
   function createStoreDisplay(store){
+    $("select#sizeSelect, #meatBoxes, #vegBoxes").empty();
     store.pizzaSizes.forEach(function(size){
       $("select#sizeSelect").append("<option value='" + size + "'>" + size + "</option>");
     });
