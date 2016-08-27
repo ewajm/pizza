@@ -3,17 +3,26 @@
 TODO: silly locations (space http://www.color-hex.com/color-palette/17107, Atlantis-generally under the sea http://www.color-hex.com/color-palette/13364, something fantasy  related http://www.color-hex.com/color-palette/3694(seeliehttp://www.color-hex.com/color-palette/12975, unseelie?http://www.color-hex.com/color-palette/1753))
 TODO: pre-made pizza menu? (with ability to edit in case you don't like peppers)
 TODO: pizza for non-humans (aliens, robots, mermaids, vampires/the undead)
-TODO: delivery tracking! (random)
 */
+var branches = ["Space", "Undersea", "Fantasy"];
 
 //objects
-function Store(name, place){
+function Store(name){
   this.name = name;
-  this.place = place;
+  this.place;
   this.meats = ["pepperoni", "sausage", "Canadian bacon", "actual bacon", "anchovies"];
   this.veggies = ["onions", "olives", "green peppers", "mushrooms", "tomatoes", "banana peppers", "jalapenos", "pineapple"];
   this.pizzaSizes = ["Large", "Medium", "Small"];
   this.sizePrices = [12, 9, 6];
+}
+
+Store.prototype.setBranch = function(placeIndex){
+  var branchMeats = [["space pepperoni", "space sausage"], ["shark", "kraken"], ["dragon", "gryphon"]];
+  var branchVeggies = [["space mushrooms", "space onions", "space olives"], ["red algae", "kelp", "sea grapes"], ["slime mold", "athelas", "fruit of the lotus tree"]];
+  this.place = branches[placeIndex];
+  this.name = this.place + " Pizza Place";
+  this.meats = branchMeats[placeIndex].concat(this.meats);
+  this.veggies = branchVeggies[placeIndex].concat(this.veggies);
 }
 
 Store.prototype.getPrice = function(pizza){
@@ -74,7 +83,8 @@ Customer.prototype.addPizza = function(pizza){
 
 //<!-- Front End  -->
 $(document).ready(function(){
-  var thisStore = new Store("Generic Pizza Place", "Generic");
+  var thisStore = new Store("Generic Pizza Place");
+  thisStore.setBranch("Generic");
   var currentCustomer = new Customer("User");
   createStoreDisplay(thisStore);
 
