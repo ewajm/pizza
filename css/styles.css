@@ -24,6 +24,14 @@ footer {
   margin-top: 1rem;
 }
 
+.titleImg{
+  display: none;
+}
+
+.headerRow {
+  margin: 1rem;
+}
+
 h3 button.btn-primary {
   font-family: sans-serif;
   margin-left: 2rem;
@@ -32,6 +40,7 @@ h3 button.btn-primary {
 .container {
   background-color: #fffa8a;
   font-weight: bold;
+  margin-top: 2rem;
 }
 
 .pizzaOutput {
@@ -93,4 +102,18 @@ h3 button.btn-primary {
 #refund:hover {
   color: #ce0000;
   text-decoration: underline;
+}
+
+/* media queries */
+@media screen and (min-width: 768px){
+  .titleImg {
+    display: block;
+  }
+}
+
+@media screen and (min-width: 992px){
+  .headerRow{
+    width: 80%;
+    margin: 2rem auto;
+  }
 }
