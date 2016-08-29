@@ -5,6 +5,8 @@ TODO: pre-made pizza menu? (with ability to edit in case you don't like peppers)
 TODO: pizza for non-humans (aliens, robots, mermaids, vampires/the undead)
 */
 var branches = ["Space", "Undersea", "Fantasy"];
+var branchMeats = [["space pepperoni*", "space sausage*"], ["shark*", "kraken*"], ["dragon*", "gryphon*"]];
+var branchVeggies = [["space onions*", "space olives*", "space green peppers*", "space mushrooms*"] , ["red algae*", "kelp*", "sea grapes*"], ["slime mold*", "athelas*", "fruit of the lotus tree*"]];
 
 //objects
 function Store(name){
@@ -14,12 +16,12 @@ function Store(name){
   this.veggies = ["onions", "olives", "green peppers", "mushrooms", "tomatoes", "banana peppers", "jalapenos", "pineapple"];
   this.pizzaSizes = ["Large", "Medium", "Small"];
   this.sizePrices = [12, 9, 6];
+  this.placeIndex = -1;
 }
 
 Store.prototype.setBranch = function(placeIndex){
-  var branchMeats = [["space pepperoni*", "space sausage*"], ["shark*", "kraken*"], ["dragon*", "gryphon*"]];
-  var branchVeggies = [["space onions*", "space olives*", "space green peppers*", "space mushrooms*"] , ["red algae*", "kelp*", "sea grapes*"], ["slime mold*", "athelas*", "fruit of the lotus tree*"]];
   this.place = branches[placeIndex];
+  this.placeIndex = placeIndex;
   this.meats = branchMeats[placeIndex].concat(this.meats);
   this.veggies = branchVeggies[placeIndex].concat(this.veggies);
 }
@@ -27,6 +29,7 @@ Store.prototype.setBranch = function(placeIndex){
 Store.prototype.getPrice = function(pizza){
   pizza.price = 0;
   pizza.price = this.sizePrices[this.pizzaSizes.indexOf(pizza.size)];
+  pizza.price += pizza.checkPremiums(this.placeIndex);
   pizza.price += pizza.meatToppings.length * 2;
   pizza.price += pizza.vegToppings.length;
   return pizza.price;
@@ -64,6 +67,27 @@ function Pizza(size, meatToppings, vegToppings){
   this.price;
 }
 
+Pizza.prototype.checkPremiums = function(placeIndex){
+  debugger;
+  if(placeIndex < 0){
+    return 0;
+  } else {
+    var premium = 0;
+    for(var i = 0; i < this.meatToppings.length; i++){
+      console.log(branchMeats[placeIndex] + " " + this.meatToppings[i]);
+      if(branchMeats[placeIndex].indexOf(this.meatToppings[i] + "*") !== -1){
+        premium++;
+      }
+    }
+    for(var i = 0; i < this.vegToppings.length; i++){
+      if(branchVeggies[placeIndex].indexOf(this.vegToppings[i] + "*") !== -1){
+        premium++;
+      }
+    }
+    return premium;
+  }
+}
+
 function Customer(name){
   this.name = name;
   this.pizzas = [];
@@ -86,6 +110,7 @@ $(document).ready(function(){
   var currentCustomer = new Customer("User");
   createStoreDisplay(thisStore);
 
+  //modal to get user info and choose branch runs on page load but page will run if not fully filled out by defaulting to generic branch + carryout
   $("#startModal").modal();
 
   $("input:radio[name=deliveryOption]").change(function(){
