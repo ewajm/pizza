@@ -132,11 +132,11 @@ $(document).ready(function(){
       $("#carryoutOrder").hide();
     }
     var branch = parseInt($("#branchSelect").val());
-    console.log(isNaN(branch));
     if(!isNaN(branch)){
       thisStore.setBranch(branch);
       createStoreDisplay(thisStore);
       $("#premiumWarning").show();
+      $("body").removeClass().addClass(thisStore.place.toLowerCase());
     }
     $("#startModal").modal("hide");
   });

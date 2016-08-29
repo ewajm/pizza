@@ -1,14 +1,5 @@
-body {
-  background-color: #e12301;
-}
-
 h1 {
   text-align: center;
-}
-
-h1, h2, h3{
-  color:#ce0000;
-  font-family: impact;
 }
 
 hr {
@@ -20,7 +11,6 @@ hr {
 footer {
   font-size: x-small;
   text-align: center;
-  color: #e1d800;
   margin-top: 1rem;
 }
 
@@ -38,7 +28,6 @@ h3 button.btn-primary {
 }
 
 .container {
-  background-color: #fffa8a;
   font-weight: bold;
   margin-top: 2rem;
 }
@@ -104,7 +93,93 @@ h3 button.btn-primary {
   text-decoration: underline;
 }
 
-/* media queries */
+/*********************
+ Branch Color Schemes
+***************8*****/
+/* Space Branch */
+body.space {
+  background-color: #15317e;
+  color: white;
+}
+
+.space .container {
+  background-color: #0c090a;
+  padding: 1rem 2rem;
+}
+
+.space footer {
+  color: 	#98afc7;
+}
+
+.space h1, .space h2,.space h3{
+  color: 	#7d0541;
+  font-family: 'Baloo Chettan', cursive;;
+}
+
+/* Ocean Branch */
+body.undersea {
+  background-color: #3a96db;
+  color: white;
+}
+
+.undersea .container {
+  background-color: #14a59a;
+  padding: 1rem 2rem;
+}
+
+.undersea footer {
+  color: #364be3;
+}
+
+.undersea h1, .undersea h2,.undersea h3{
+  color: #364be3;
+  font-family: 'Indie Flower', cursive;
+}
+
+/* Fantasy Branch */
+body.fantasy {
+  background-color: #541e16;
+  color: #295128;
+}
+
+.fantasy .container {
+  background-color: #e5eec5;
+  padding: 1rem 2rem;
+}
+
+.fantasy footer {
+  color: #e5eec5;
+}
+
+.fantasy h1, .fantasy h2,.fantasy h3{
+  color: #db8b97;
+  font-family: 'MedievalSharp', cursive;
+}
+
+/* Regular/Generic Branch */
+body.regular {
+  background-color: #e12301;
+}
+
+.regular .container {
+  background-color: #fffa8a;
+}
+
+.regular footer {
+  color: #e1d800;
+}
+
+.regular h1, .regular h2, .regular h3{
+  color:#ce0000;
+  font-family: sans-serif;
+}
+
+
+
+
+/**********************
+     media queries
+************************/
 @media screen and (min-width: 768px){
   .titleImg {
     display: block;
