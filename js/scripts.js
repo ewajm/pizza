@@ -1,12 +1,11 @@
 //<!-- Back End -->
 /*
-TODO: silly locations (space http://www.color-hex.com/color-palette/17107, Atlantis-generally under the sea http://www.color-hex.com/color-palette/13364, something fantasy  related http://www.color-hex.com/color-palette/3694(seeliehttp://www.color-hex.com/color-palette/12975, unseelie?http://www.color-hex.com/color-palette/1753))
 TODO: pre-made pizza menu? (with ability to edit in case you don't like peppers)
 TODO: pizza for non-humans (aliens, robots, mermaids, vampires/the undead)
 */
 var branches = ["Space", "Undersea", "Fantasy"];
-var branchMeats = [["space pepperoni*", "space sausage*"], ["shark*", "kraken*"], ["dragon*", "gryphon*"]];
-var branchVeggies = [["space onions*", "space olives*", "space green peppers*", "space mushrooms*"] , ["red algae*", "kelp*", "sea grapes*"], ["slime mold*", "athelas*", "fruit of the lotus tree*"]];
+var branchMeats = [["space pepperoni*", "space sausage*", "space madness*"], ["shark*", "kraken*"], ["dragon*", "gryphon*"]];
+var branchVeggies = [["space onions*", "space olives*", "space green peppers*", "space mushrooms*", "vegan space madness*"] , ["red algae*", "kelp*", "sea grapes*"], ["slime mold*", "athelas*", "fruit of the lotus tree*"]];
 
 //objects
 function Store(name){
